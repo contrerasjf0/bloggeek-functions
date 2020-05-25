@@ -21,7 +21,7 @@ exports.createUser = functions.auth
 
 exports.eliminacionUsuario = functions.auth
   .user()
-  .onDelete(userController.UserRemoveController)
+  .onDelete(userController.userRemoveController)
 
 exports.createUserCRM = functions.auth
   .user()

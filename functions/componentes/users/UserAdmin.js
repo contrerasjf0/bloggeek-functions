@@ -1,10 +1,11 @@
+const admin = require('firebase-admin')
 const { Email } = require('../utility/EmailHelper.js')
 const { HubSpotHelper } = require('../utility/HubSpotHelper.js')
 const {
   welcomeEmailTemplate,
   farewellEmailTemplate
 } = require('../utility/TemplateEmail.js')
-const admin = require('firebase-admin')
+
 
 class AdminUser {
   registerUserEmail (name, email) {
