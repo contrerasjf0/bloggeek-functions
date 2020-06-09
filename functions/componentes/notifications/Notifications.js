@@ -16,7 +16,7 @@ class Notifications {
   }
 
   sendNotification (title, description, topic, type) {
-    const topicSend = topic === null ? 'newPosts' : topic
+    const topicSend = topic === null ? 'NewPosts' : topic
 
     const message = {
       data: {

@@ -1,8 +1,8 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
 const userController = require('./componentes/users/UserController.js')
-//const notificationController = require('./componentes/notificaciones/NotificationController.js')
-//const postsController = require('./componentes/posts/PostsController.js')
+const notificationController = require('./componentes/notifications/NotificationController.js')
+const postsController = require('./componentes/posts/PostsController.js')
 //const errorController = require('./componentes/errores/ErrorController.js')
 //const analyticalController = require('./componentes/analytical/AnalyticalController.js')
 
@@ -32,3 +32,11 @@ exports.eliminacionUsuario = functions.auth
 exports.createUserCRM = functions.auth
   .user()
   .onCreate(userController.createUserCRM)
+
+  exports.registerTopic = functions.firestore
+  .document('/tokens/{id}')
+  .onCreate(notificationController.tokenCreationController)
+
+exports.sendNotification = functions.firestore
+  .document('posts/{idPost}')
+  .onCreate(postsController.postUpdateController)
