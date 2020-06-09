@@ -26,6 +26,21 @@ exports.authorController = (dataSnapshot, context) => {
 
 exports.validateImgPostController = img => {
   
+  if (!imagen.name.match(/imgsposts/)) {
+    return null
+  }
+
+  if (!imagen.contentType.startsWith('image/')) {
+    console.error('El archivo no es una imagen')
+    return null
+  }
+
+  const posts = new Posts()
+
+  return posts.validateImage(imagen).catch(error => {
+    console.error(`${error}`)
+  })
+
 }
 
 exports.sendPostsWeek = (req, resp, next) => {

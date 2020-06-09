@@ -3,7 +3,7 @@ const functions = require('firebase-functions')
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
-//const vision = require('@google-cloud/vision')
+const vision = require('@google-cloud/vision')
 const { Email } = require('./../utility/EmailHelper.js')
 const template = require('./../utility/EmailTemplate.js')
 const { Notifications } = require('./../notifications/Notifications.js')
@@ -14,6 +14,13 @@ class Posts {
   }
 
   validateImage (file) {
+
+    const filePath = file.name
+    const fileName = path.basename(filePath)
+    const idPost = path.basename(filePath).split('.')[0]
+    const bucket = admin.storage().bucket()
+    const tmpFilePath = path.join(os.tmpdir(), fileName)
+
   }
 
   isAdequate (result) {

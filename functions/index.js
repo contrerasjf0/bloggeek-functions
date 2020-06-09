@@ -33,10 +33,14 @@ exports.createUserCRM = functions.auth
   .user()
   .onCreate(userController.createUserCRM)
 
-  exports.registerTopic = functions.firestore
+exports.registerTopic = functions.firestore
   .document('/tokens/{id}')
   .onCreate(notificationController.tokenCreationController)
 
 exports.sendNotification = functions.firestore
   .document('posts/{idPost}')
   .onCreate(postsController.postUpdateController)
+
+exports.validateImg = functions.storage
+    .object()
+    .onFinalize(postsController.validateImgPostController)
