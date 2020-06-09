@@ -1,13 +1,14 @@
 const admin = require('firebase-admin')
 const { Email } = require('../utility/EmailHelper.js')
-const { HubSpotHelper } = require('../utility/HubSpotHelper.js')
+//const { HubSpotHelper } = require('../utility/HubSpotHelper.js')
 const {
   welcomeEmailTemplate,
   farewellEmailTemplate
-} = require('../utility/TemplateEmail.js')
+} = require('../utility/EmailTemplate.js')
 
 
-class AdminUser {
+class UserAdmin {
+
   registerUserEmail (name, email) {
     console.log('register email')
     return admin
@@ -53,10 +54,10 @@ class AdminUser {
     )
   }
 
-    syncUpCRM (name, lastName, email) {
+   /* syncUpCRM (name, lastName, email) {
     const hubSpot = new HubSpotHelper()
     return hubSpot.createUser(name, lastName, email)
-  }
+  }*/
 }
 
-exports.AdminUser = AdminUser
+exports.UserAdmin = UserAdmin

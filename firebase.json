@@ -2,6 +2,11 @@
   "functions": {
     "predeploy": [
       "npm --prefix functions run lint"
-    ]
+    ],
+    "source": "functions"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   }
 }

@@ -66,3 +66,5 @@ node_modules/
 
 #Variable de entorno
 .runtimeconfig.json
+
+.blogeek-d1979-PrivateKey.json

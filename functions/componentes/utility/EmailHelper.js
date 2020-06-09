@@ -5,7 +5,7 @@ class Email {
   constructor () {
     const userEmail = functions.config().configuration.email
     const passwordEmail = functions.config().configuration.password
-
+    
     this.mailTransport = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
