@@ -31,7 +31,7 @@ exports.validateImgPostController = img => {
   }
 
   if (!imagen.contentType.startsWith('image/')) {
-    console.error('El archivo no es una imagen')
+    console.error('The files is not an image.')
     return null
   }
 

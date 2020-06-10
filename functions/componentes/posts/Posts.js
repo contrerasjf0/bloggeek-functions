@@ -21,6 +21,36 @@ class Posts {
     const bucket = admin.storage().bucket()
     const tmpFilePath = path.join(os.tmpdir(), fileName)
 
+
+    const cliente = new vision.ImageAnnotatorClient()
+    
+    return bucket
+      .file(filePath)
+      .download({
+        destination : tmpFilePath
+      })
+      .then(() => {
+        return cliente.safeSearchDetection(tmpFilePath)
+      })
+      .then(result => {
+        const adult = result[0].safeSearchAnnotation.adult
+        const violence = result[0].safeSearchAnnotation.violence
+        const medical = result[0].safeSearchAnnotation.medical
+        return (
+          this.isAdequate(adult) &&
+          this.isAdequate(medical) &&
+          this.isAdequate(violence)
+        )
+      })
+      .then(resp => {
+        if(resp){
+          this.updatePostState(idPost, true)
+          return resp
+        }
+
+        return this.sendNotRespImageInappropriate(idPost)
+      })
+
   }
 
   isAdequate (result) {
