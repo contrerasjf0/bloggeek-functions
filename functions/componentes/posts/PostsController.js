@@ -43,6 +43,7 @@ exports.validateImgPostController = img => {
 
 }
 
-exports.sendPostsWeek = (req, resp, next) => {
-  
+exports.sendPostsWeek = (topico) => {
+  const post = new Posts()
+  return post.sendPostWeek(topico)
 }

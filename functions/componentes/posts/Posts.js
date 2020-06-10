@@ -98,8 +98,48 @@ class Posts {
   }
 
   sendPostWeek (notificationTopic) {
-    
+
+    const endDate = new Date()
+    let startDate = new Date()
+    startDate.setDate(endDate.getDate() - 5)
+    let emails = ''
+
+    return admin
+      .firestore()
+      .collection('usersEmails')
+      .get()
+      .then(userEmails => {
+        userEmails.forEach(userEmail => {
+          emails += `${userEmail.data().email}, `
+        })
+        return emails
+      })
+      .then(() => {
+        return admin
+          .firestore()
+          .collection('posts')
+          .where('date', '>=', startDate)
+          .where('date', '<=', endDate)
+          .where('public  ', '==', true)
+          .get()
+      })
+      .then(posts => {
+        if (!posts.empty) {
+          const textHtml = template.weekVideoTemplate(posts)
+          const objEmail = new Email()
+
+          return objEmail.sendEmail(
+            'info@conjf.com.mx',
+            emails,
+            '',
+            'Video Blogekk - The week geek videos',
+            textHtml
+          )
+        }
+
+        return null
+      })
   }
 }
 
-exports.Posts = Posts
+exports.Posts = Posts 
