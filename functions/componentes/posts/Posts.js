@@ -140,6 +140,19 @@ class Posts {
         return null
       })
   }
+
+  getPost (id) {
+    
+    return admin
+      .firestore()
+      .collection('posts')
+      .doc(id)
+      .get()
+      .then(post => {
+        return post.data()
+      })
+      .catch((error) => console.error(`${error} post`) )
+  }
 }
 
 exports.Posts = Posts 

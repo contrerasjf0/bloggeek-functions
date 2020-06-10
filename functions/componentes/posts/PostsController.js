@@ -1,5 +1,6 @@
 const { Notifications } = require('./../notifications/Notifications.js')
 const { Posts } = require('./Posts.js')
+const { postTemplate } = require('../utility/pagesTemplates.js')
 
 exports.postUpdateController = (dataSnapshot, context) => {
   const notifications = new Notifications()
@@ -46,4 +47,15 @@ exports.validateImgPostController = img => {
 exports.sendPostsWeek = (topico) => {
   const post = new Posts()
   return post.sendPostWeek(topico)
+}
+
+exports.renderPost = (req, resp) => {
+  
+  const post = new Posts();
+
+  return post.getPost(req.query.idPost)
+      .then((data) => {
+          return resp.status(200).send(postTemplate(data))
+      })
+      .catch((error) => console.error(`${error} controller`) )
 }

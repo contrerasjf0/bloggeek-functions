@@ -8,5 +8,14 @@
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "public",
+    "rewrites": [ 
+      {
+        "source": "/post", 
+        "function": "renderPost"
+      }
+    ]
   }
 }

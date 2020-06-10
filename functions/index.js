@@ -77,3 +77,5 @@ exports.validateImg = functions.storage
     .onFinalize(postsController.validateImgPostController)
 
 exports.sendWeekPost = functions.https.onRequest(app)
+
+exports.renderPost = functions.https.onRequest(postsController.renderPost)
