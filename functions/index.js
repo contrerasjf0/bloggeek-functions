@@ -5,7 +5,7 @@ const notificationController = require('./componentes/notifications/Notification
 const postsController = require('./componentes/posts/PostsController.js')
 const express = require('express')
 const cors = require('cors')
-//const errorController = require('./componentes/errores/ErrorController.js')
+const errorController = require('./componentes/errors/ErrorController.js')
 //const analyticalController = require('./componentes/analytical/AnalyticalController.js')
 
 const app = express()
@@ -23,7 +23,7 @@ admin.firestore().settings({ timestampsInSnapshots: true })
 
 // firebase functions:config:set configuration.email="XXXX" configuration.password="XXXXXX"
 // firebase functions:config:set configuration.claveapihubspot="XXXX"
-// firebase functions:config:set configuration.numcelularerror="XXXX"
+// firebase functions:config:set configuration.phoneNumeberError="XXXX"
 // firebase functions:config:set configuration.accountsidtwilio="XXXX"
 // firebase functions:config:set configuration.authtokentwilio="XXXX"
 
@@ -79,3 +79,7 @@ exports.validateImg = functions.storage
 exports.sendWeekPost = functions.https.onRequest(app)
 
 exports.renderPost = functions.https.onRequest(postsController.renderPost)
+
+exports.newErrorApp = functions.crashlytics
+  .issue()
+  .onNew(errorController.handler)
