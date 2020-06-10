@@ -6,7 +6,7 @@ exports.handler = issue => {
   const titulo = issue.issueTitle
   const appName = issue.appName
 
-  const phoneNumber = functions.config().configuration.phoneNumeberError
+  const phoneNumber = functions.config().configuration.phoneNumberError
 
   const messaje = `Error on the ${appName} app => ${titulo}`
 
